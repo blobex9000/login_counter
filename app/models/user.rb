@@ -1,0 +1,45 @@
+class User < ActiveRecord::Base
+
+  SUCCESS = 1
+  ERR_BAD_CREDENTIALS = -1
+  ERR_USER_EXISTS = -2
+  ERR_BAD_USERNAME = -3
+  ERR_BAD_PASSWORD = -4
+  MAX_USERNAME_LENGTH = 128
+  MAX_PASSWORD_LENGTH = 128
+
+  def self.add(username, pword)
+    if (username.length < 1) || (username.length > MAX_USERNAME_LENGTH)
+      return ERR_BAD_USERNAME
+    end
+    if pword.length > MAX_PASSWORD_LENGTH
+      return ERR_BAD_PASSWORD 
+    end
+    if User.find_by(user: username) != nil
+      return ERR_USER_EXISTS
+    end
+    user = User.new()
+    user.user = username
+    user.password = pword
+    user.count = 1
+    user.save
+    return user.count
+  end
+
+  def self.login(username, pword)
+    user = User.find_by(user: username, password: pword)
+    if user == nil
+      return ERR_BAD_CREDENTIALS
+    else
+      user.count = user.count + 1
+      user.save
+      return user.count
+    end
+  end
+
+  def self.TESTAPI_resetFixture
+    User.delete_all
+    return SUCCESS
+  end
+
+end

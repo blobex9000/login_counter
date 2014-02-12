@@ -1,0 +1,37 @@
+class UsersController < ApplicationController
+
+  def add
+    #begin
+      cknlskdf
+      addReturn = User.add(params[:user], params[:password])
+      msg = {}
+      if addReturn > 0
+        msg = { :errCode => 1, :count => addReturn }
+      else
+        msg = { :errCode => addReturn }
+      end
+      render :status => 200, :json => msg
+      #render :nothing => true, :status => 200
+    #rescue Exception => e
+    #  render :nothing => true, :status => 500
+    #end
+    #Rails.logger.debug("XXXXXXXXXXXXXXXXXXXXXXX")
+  end
+
+  def login
+    begin
+      asdf
+      loginReturn = User.login(params[:user], params[:password])
+      msg = {}
+      if loginReturn > 0
+        msg = { :errCode => 1, :count => loginReturn }
+      else
+        msg = { :errCode => loginReturn }
+      end
+      render :status => 200, :json => msg
+    rescue
+      render :nothing => true, :status => 500
+    end
+  end
+
+end
