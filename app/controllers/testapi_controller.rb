@@ -15,6 +15,7 @@ class TestapiController < ApplicationController
     #begin
       puts "booooooo"
       puts `pwd`
+      puts `ls`
       `rake test test/models/user_test.rb > tmp/unit_test_results.out`
       uTestsResults = `cat tmp/unit_test_results.out`
       putString = "Here are the test results: "
