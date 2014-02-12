@@ -32,7 +32,7 @@ class UserTest < ActiveSupport::TestCase
     assert(errCode == SUCCESS, "empty string is a valid password")
   end
 
-  test "user with not empty username and password should succeed"
+  test "user with not empty username and password should succeed" do
     User.TestAPI_resetFixture
     errCode = User.add("kittens", "mittens")
     assert(errCode == SUCCESS, "standard username and password suceeds")
