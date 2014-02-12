@@ -31,7 +31,6 @@ class RestTestCase(unittest.TestCase):
             serverToTest = splits[1]
 
     def makeRequest(self, url, method="GET", data={ }):
-        print "GLUUUUUUUEUEEEEEE"
         """
         Make a request to the server.
         @param url is the relative url (no hostname)
