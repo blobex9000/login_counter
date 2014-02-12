@@ -16,7 +16,7 @@ class TestapiController < ApplicationController
       puts "booooooo"
       puts `pwd`
       puts `ls tmp`
-      uTestsResults = `rake test test/models/user_test.rb`
+      uTestsResults = `heroku rake test test/models/user_test.rb`
       #uTestsResults = `cat tmp/unit_test_results.out`
       putString = "Here are the test results now: "
       putString < uTestsResults
