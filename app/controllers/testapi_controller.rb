@@ -12,14 +12,14 @@ class TestapiController < ApplicationController
   end
 
   def unitTests
-    #begin
-      puts "booooooo"
-      puts `pwd`
-      puts `ls test/models`
-      %x(ruby -Itest test/controllers/users_controller_test.rb > tmp/unit_test_results.out)#`rake test test/models/user_test.rb`
+    begin
+      #puts "booooooo"
+      #puts `pwd`
+      #puts `ls test/models`
+      %x(ruby -Itest test/model/user_test.rb > tmp/unit_test_results.out)#`rake test test/models/user_test.rb`
       uTestsResults = `cat tmp/unit_test_results.out`
-      puts "Here are the test results now: "
-      puts uTestsResults
+      #puts "Here are the test results now: "
+      #puts uTestsResults
       #putString < uTestsResults
       #puts putString
       #adfsdf
@@ -31,11 +31,11 @@ class TestapiController < ApplicationController
       numTests = testsSplitString.split(" ").last.to_i
       msg = { :nrFailed => numFailed, :output => uTestsResults, :totalTests => numTests }
       render :status => 200, :json => msg
-    #rescue  Exception => e
-    #  uTestsResults = `cat tmp/unit_test_results.out`
-    #  msg = { :output => uTestsResults }
-    #  render :status => 500, :json => msg
-    #end
+    rescue  Exception => e
+      uTestsResults = `cat tmp/unit_test_results.out`
+      msg = { :output => uTestsResults }
+      render :status => 500, :json => msg
+    end
   end
 
 end
