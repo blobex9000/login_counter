@@ -12,7 +12,8 @@ class TestapiController < ApplicationController
   end
 
   def unitTests
-    begin
+    #begin
+      puts "happy happy joy joy"
       `rake test test/models/user_test.rb > tmp/unit_test_results.out`
       uTestsResults = `cat tmp/unit_test_results.out`
       #adfsdf
@@ -24,11 +25,11 @@ class TestapiController < ApplicationController
       numTests = testsSplitString.split(" ").last.to_i
       msg = { :nrFailed => numFailed, :output => uTestsResults, :totalTests => numTests }
       render :status => 200, :json => msg
-    rescue  Exception => e
-      uTestsResults = `cat tmp/unit_test_results.out`
-      msg = { :output => uTestsResults }
-      render :status => 500, :json => msg
-    end
+    #rescue  Exception => e
+    #  uTestsResults = `cat tmp/unit_test_results.out`
+    #  msg = { :output => uTestsResults }
+    #  render :status => 500, :json => msg
+    #end
   end
 
 end
