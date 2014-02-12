@@ -2,6 +2,7 @@ class TestapiController < ApplicationController
 
   def resetFixture
    #begin
+      put "blahblahblah"
       User.TESTAPI_resetFixture
       msg = { :errCode => 1 }
       render :status => 200, :json => msg 
