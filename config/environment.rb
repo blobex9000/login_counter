@@ -4,4 +4,4 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 LoginCounter::Application.initialize!
 
-RAILS_ENV = 'development'
+ENV['RAILS_ENV'] = 'development'
