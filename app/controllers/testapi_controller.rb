@@ -18,7 +18,7 @@ class TestapiController < ApplicationController
       puts `ls tmp`
       uTestResults = `rake test test/models/user_test.rb`
       #uTestsResults = `cat tmp/unit_test_results.out`
-      putString = "Here are the test results: "
+      putString = "Here are the test results now: "
       putString < uTestsResults
       puts putString
       #adfsdf
