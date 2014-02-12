@@ -16,7 +16,7 @@ class TestapiController < ApplicationController
       puts "booooooo"
       puts `pwd`
       puts `ls test/models`
-      %x(ruby -Itest test/model/user_test.rb > tmp/unit_test_results.out)#`rake test test/models/user_test.rb`
+      %x(ruby -Itest test/models/user_test.rb > tmp/unit_test_results.out)#`rake test test/models/user_test.rb`
       uTestsResults = `cat tmp/unit_test_results.out`
       puts "Here are the test results now: "
       puts uTestsResults
