@@ -16,11 +16,12 @@ class TestapiController < ApplicationController
       puts "booooooo"
       puts `pwd`
       puts `ls tmp`
-      uTestsResults = `heroku rake test test/models/user_test.rb`
+      uTestsResults = `rake test test/models/user_test.rb`
       #uTestsResults = `cat tmp/unit_test_results.out`
-      putString = "Here are the test results now: "
-      putString < uTestsResults
-      puts putString
+      puts "Here are the test results now: "
+      puts uTestsResults
+      #putString < uTestsResults
+      #puts putString
       #adfsdf
       numTestsAndFailedLine = `cat tmp/unit_test_results.out | grep '[0-9]* failures'`
       #uTestResults = numTestsAndFailedLine
