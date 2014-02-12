@@ -20,8 +20,8 @@ class TestapiController < ApplicationController
       uTestsResults = `cat tmp/unit_test_results.out`
       puts "Here are the test results now: "
       puts uTestsResults
-      putString < uTestsResults
-      puts putString
+      #putString < uTestsResults
+      #puts putString
       #adfsdf
       numTestsAndFailedLine = `cat tmp/unit_test_results.out | grep '[0-9]* failures'`
       #uTestResults = numTestsAndFailedLine
