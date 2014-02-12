@@ -13,9 +13,9 @@ class TestapiController < ApplicationController
 
   def unitTests
     #begin
-      puts "happy happy joy joy"
       `rake test test/models/user_test.rb > tmp/unit_test_results.out`
       uTestsResults = `cat tmp/unit_test_results.out`
+      puts uTestsResults
       #adfsdf
       numTestsAndFailedLine = `cat tmp/unit_test_results.out | grep '[0-9]* failures'`
       #uTestResults = numTestsAndFailedLine
