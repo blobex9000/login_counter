@@ -26,11 +26,11 @@ class UserTest < ActiveSupport::TestCase
     assert(errCode == SUCCESS, "128 is a valid username length")
   end
 
-  #test "password that is an empty string should succeed" do
-  #  User.TESTAPI_resetFixture
-  #  errCode = User.add("Bob", "")
-  #  assert(errCode == SUCCESS, "empty string is a valid password")
-  #end
+  test "password that is an empty string should succeed" do
+    User.TESTAPI_resetFixture
+    errCode = User.add("Bob", "")
+    assert(errCode == SUCCESS, "empty string is a valid password")
+  end
 
   #test "user with non-empty username and password should succeed"
   #  User.TestAPI_resetFixture
