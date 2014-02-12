@@ -68,7 +68,6 @@ class RestTestCase(unittest.TestCase):
                     print "    "+h+"  =  "+hv
 
             if resp.status == 200:
-                print "SPOOOOOKKKYYYY"
                 data_string = resp.read()
                 # The response must be a JSON request
                 # Note: Python (at least) nicely tacks UTF8 information on this,
@@ -80,11 +79,9 @@ class RestTestCase(unittest.TestCase):
                 data = json.loads(data_string)
                 return data
             else:
-                print "HIIIIIIIIIIIIIIII!!!!!!!!!!!!"
                 self.assertEquals(200, resp.status)
         except:
             # In case of errors dump the whole response,to simplify debugging
-            print "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!"
             print "Got exception when processing response to url="+url+" method="+method+" data="+str(data)
             print "  Response status = "+str(resp.status)
             print "  Response headers: "
