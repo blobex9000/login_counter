@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
     assert(errCode == ERR_BAD_USERNAME, "Empty username should be bad")
   end
 
-  test "username with MAX_USERNAME_LENGTH should succeed" do
+  test "username with MAX_USERNAME_LENGTH should be added" do
     User.TESTAPI_resetFixture
     s = ""
     for i in 1..MAX_USERNAME_LENGTH
@@ -26,16 +26,43 @@ class UserTest < ActiveSupport::TestCase
     assert(errCode == SUCCESS, "128 is a valid username length")
   end
 
-  test "password that is an empty string should succeed" do
+  test "password that is an empty string should be added" do
     User.TESTAPI_resetFixture
     errCode = User.add("Bob", "")
     assert(errCode == SUCCESS, "empty string is a valid password")
   end
 
-  test "user with not empty username and password should succeed" do
-    User.TestAPI_resetFixture
+  test "user with not empty username and password should be added" do
+    User.TESTAPI_resetFixture
     errCode = User.add("kittens", "mittens")
     assert(errCode == SUCCESS, "standard username and password suceeds")
+  end
+
+  test "password with MAX_PASSWORD_LENGTH should be added" do
+    User.TESTAPI_resetFixture
+    s = ""
+    for i in 1..MAX_PASSWORD_LENGTH
+      s << "a"
+    end
+    errCode = User.add("blah", s)
+    assert(errCode = SUCCESS, "password with max length should be added")
+  end
+
+  test "user with username larger than max should not be added" do
+    User.TESTAPI_resetFixture
+    s_len = MAX_USERNAME_LENGTH + 1
+    for i in 1..s_len
+      s << "b"
+    end
+    errCode = User.add("fred", s)
+    assert(errCode = SUCCESS, "username that is too long shouldn't be added")
+  end
+
+  test "added user should be able to login and count should be 1" do
+    User.TESTAPI_resetFixture
+    errCodeAdd = User.add("ted", "web")
+    errCodeLogin = User.login("ted", "web")
+    assert(errCodeAdd = SUCESS && errCodeLogin = 1, "added user should be able to login")
   end
 
 end
