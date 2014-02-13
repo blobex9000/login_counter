@@ -19,7 +19,7 @@ class TestAdditional(testLib.RestTestCase):
         self.assertDictEqual(expected, respData)
 
     def testAddWithEmptyPW(self):
-        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
         self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user2', 'password' : ''} )
         self.assertResponse(respData, count = 1)
@@ -56,13 +56,13 @@ class TestAdditional(testLib.RestTestCase):
         self.assertResponse(respData, count = 2)
 
     def testUsersRemovedProperly(self):
-        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
         self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
         self.assertResponse(respData, count = 1)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
         self.assertResponse(respData, count = 1)
-        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
         self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
         self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
