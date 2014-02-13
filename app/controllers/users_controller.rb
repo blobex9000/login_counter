@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def add
-    #begin
+    begin
       #cknlskdf
       addReturn = User.add(params[:user], params[:password])
       msg = {}
@@ -12,9 +12,9 @@ class UsersController < ApplicationController
       end
       render :status => 200, :json => msg
       #render :nothing => true, :status => 200
-    #rescue Exception => e
-    #  render :nothing => true, :status => 500
-    #end
+    rescue Exception => e
+      render :nothing => true, :status => 500
+    end
     #Rails.logger.debug("XXXXXXXXXXXXXXXXXXXXXXX")
   end
 
