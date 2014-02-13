@@ -7,7 +7,7 @@ import unittest
 import os
 import testLib
 
-class TestAddWithEmptyPassword(testLib.RestTestCase):
+class TestAdditional(testLib.RestTestCase):
     """Test adding users"""
     def assertResponse(self, respData, count = 1, errCode = testLib.RestTestCase.SUCCESS):
         """                                                                                                     
@@ -19,6 +19,8 @@ class TestAddWithEmptyPassword(testLib.RestTestCase):
         self.assertDictEqual(expected, respData)
 
     def testAddWithEmptyPW(self):
+        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user2', 'password' : ''} )
         self.assertResponse(respData, count = 1)
 
@@ -52,3 +54,5 @@ class TestAddWithEmptyPassword(testLib.RestTestCase):
         self.assertResponse(respData, count = 2)
         respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
         self.assertResponse(respData, count = 2)
+
+    def 
