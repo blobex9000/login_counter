@@ -28,3 +28,27 @@ class TestAddWithEmptyPassword(testLib.RestTestCase):
             s += 'a'
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : s, 'password' : ''} )
         self.assertResponse(respData, count = 1)
+
+   def testAddWithMaxPasswordLength(self):
+       s = ''
+       for i in range(128):
+           s += 'a'
+       respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'Bob', 'password' : s} )
+       self.assertResponse(respData, count = 1)
+
+   def testAddWithOverlyLongUserName(self):
+       s = ''
+       for i in range(129):
+           s += 'a'
+       respData = self.makeRequest("/users/add", method="POST", data = { 'user' : s, 'password' : 'blah'} )
+       self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_USERNAME)
+
+   def testMultipleLogin(self):
+       self.makeRequest("/users/add", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
+       self.assertResponse(respData, count = 1)
+       self.makeRequest("/users/add", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
+       self.assertResponse(respData, count = 1)
+       self.makeRequest("/users/login", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
+       self.assertResponse(respData, count = 2)
+       self.makeRequest("/users/login", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
+       self.assertResponse(respData, count = 2)
