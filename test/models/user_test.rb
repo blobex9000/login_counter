@@ -71,7 +71,7 @@ class UserTest < ActiveSupport::TestCase
     errCodeAdd = User.add("ted", "web")
     errCodeLogin1 = User.login("ted", "web")
     errCodeLogin2 = User.login("ted", "web")
-    assert(errCodeAdd = SUCCESS && errCodeLogin1 = 1 and errCodeLogin2, "added user should be able to login twice")
+    assert(errCodeAdd = SUCCESS && errCodeLogin1 = 1 && errCodeLogin2 = 2, "added user should be able to login twice")
   end
 
   test "user not added to db should not be able to login" do
