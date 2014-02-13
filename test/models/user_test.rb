@@ -51,6 +51,7 @@ class UserTest < ActiveSupport::TestCase
   test "user with username larger than max should not be added" do
     User.TESTAPI_resetFixture
     s_len = MAX_USERNAME_LENGTH + 1
+    s = ""
     for i in 1..s_len
       s << "b"
     end
@@ -62,7 +63,7 @@ class UserTest < ActiveSupport::TestCase
     User.TESTAPI_resetFixture
     errCodeAdd = User.add("ted", "web")
     errCodeLogin = User.login("ted", "web")
-    assert(errCodeAdd = SUCESS && errCodeLogin = 1, "added user should be able to login")
+    assert(errCodeAdd = SUCCESS && errCodeLogin = 1, "added user should be able to login")
   end
 
 end
