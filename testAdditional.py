@@ -25,6 +25,8 @@ class TestAdditional(testLib.RestTestCase):
         self.assertResponse(respData, count = 1)
 
     def testAddWithMaxLengthUserName(self):
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
         s = ''
         for i in range(128):
             s += 'a'
@@ -32,6 +34,8 @@ class TestAdditional(testLib.RestTestCase):
         self.assertResponse(respData, count = 1)
 
     def testAddWithMaxPasswordLength(self):
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
         s = ''
         for i in range(128):
             s += 'a'
@@ -39,6 +43,8 @@ class TestAdditional(testLib.RestTestCase):
         self.assertResponse(respData, count = 1)
 
     def testAddWithOverlyLongUserName(self):
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
         s = ''
         for i in range(129):
             s += 'a'
@@ -46,6 +52,8 @@ class TestAdditional(testLib.RestTestCase):
         self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_USERNAME)
 
     def testMultipleLogin(self):
+        respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
         self.assertResponse(respData, count = 1)
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
@@ -65,6 +73,6 @@ class TestAdditional(testLib.RestTestCase):
         respData = self.makeRequest("/TESTAPI/resetFixture", method="POST", data = { } )
         self.assertResponse(respData, count = None)
         respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
-        self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
         respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
-        self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
