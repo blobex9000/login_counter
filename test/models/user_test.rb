@@ -66,4 +66,18 @@ class UserTest < ActiveSupport::TestCase
     assert(errCodeAdd = SUCCESS && errCodeLogin = 1, "added user should be able to login")
   end
 
+  test "added user should be able to login twice and count should be 2" do
+    User.TESTAPI_resetFixture
+    errCodeAdd = User.add("ted", "web")
+    errCodeLogin1 = User.login("ted", "web")
+    errCodeLogin2 = User.login("ted", "web")
+    assert(errCodeAdd = SUCCESS && errCodeLogin1 = 1 and errCodeLogin2, "added user should be able to login twice")
+  end
+
+  test "user not added to db should not be able to login" do
+    User.TESTAPI_resetFixture
+    errCode = User.login("arg", "")
+    assert(errCodeAdd = ERR_BAD_CREDENTIALS, "user not added should not be able to login")
+  end
+
 end
