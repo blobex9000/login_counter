@@ -21,3 +21,10 @@ class TestAddWithEmptyPassword(testLib.RestTestCase):
     def testAddWithEmptyPW(self):
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user2', 'password' : ''} )
         self.assertResponse(respData, count = 1)
+
+    def testAddWithMaxLengthUserName(self):
+        s = ''
+        for i in range(128):
+            s += 'a'
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : s, 'password' : ''} )
+        self.assertResponse(respData, count = 1)
