@@ -85,5 +85,6 @@ class UserTest < ActiveSupport::TestCase
     errCode1 = User.add("ted", "web")
     errCode2 = User.add("ted", "web")
     assert(errCode1 = SUCCESS && errCode2 = ERR_BAD_USERNAME, "added user should be able to login")  
+  end
 
 end
