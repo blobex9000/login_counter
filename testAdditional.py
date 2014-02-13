@@ -55,4 +55,16 @@ class TestAdditional(testLib.RestTestCase):
         respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
         self.assertResponse(respData, count = 2)
 
-    def 
+    def testUsersRemovedProperly(self):
+        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
+        self.assertResponse(respData, count = 1)
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
+        self.assertResponse(respData, count = 1)
+        respData = self.makeRequest("/TESTAPI/resetFIXTURE", method="POST", data = { } )
+        self.assertResponse(respData, count = None)
+        respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'a', 'password' : 'blah'} )
+        self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+        respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'b', 'password' : 'blah'} )
+        self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
