@@ -80,4 +80,10 @@ class UserTest < ActiveSupport::TestCase
     assert(errCodeAdd = ERR_BAD_CREDENTIALS, "user not added should not be able to login")
   end
 
+  test "cannot add same user twice" do
+    User.TESTAPI_resetFixture
+    errCode1 = User.add("ted", "web")
+    errCode2 = User.add("ted", "web")
+    assert(errCode1 = SUCCESS && errCode2 = ERR_BAD_USERNAME, "added user should be able to login")  
+
 end
